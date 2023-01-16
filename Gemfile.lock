@@ -282,7 +282,7 @@ GEM
       airbrake-ruby (~> 6.0)
     airbrake-ruby (6.2.0)
       rbtree3 (~> 0.5)
-    appsignal (3.1.6)
+    appsignal (3.3.1)
       rack
     ast (2.4.2)
     attr_required (1.0.1)
@@ -716,7 +716,7 @@ GEM
     pry-stack_explorer (0.6.1)
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
-    psych (4.0.6)
+    psych (5.0.1)
       stringio
     public_suffix (5.0.0)
     puffing-billy (3.0.4)
@@ -733,7 +733,7 @@ GEM
       puma (>= 5.0, < 6)
     raabro (1.4.0)
     racc (1.6.0)
-    rack (2.2.4)
+    rack (2.2.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-attack (6.6.1)
@@ -926,7 +926,7 @@ GEM
     ssrf_filter (1.1.1)
     stackprof (0.2.22)
     stringex (2.8.5)
-    stringio (3.0.2)
+    stringio (3.0.4)
     structured_warnings (0.4.0)
     svg-graph (2.2.1)
     swd (1.3.0)
@@ -1176,4 +1176,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.12
+   2.4.1
