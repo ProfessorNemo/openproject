@@ -49,6 +49,9 @@ COPY lib ./lib
 RUN bundle install --quiet --deployment --path vendor/bundle --no-cache \
   --with="$RAILS_GROUPS" --without="test development" --jobs=8 --retry=3 && \
   rm -rf vendor/bundle/ruby/*/cache && rm -rf vendor/bundle/ruby/*/gems/*/spec && rm -rf vendor/bundle/ruby/*/gems/*/test
+RUN gem install rails
+RUN apt-get update
+RUN apt-get install -y vim
 
 # Finally, copy over the whole thing
 COPY . .
@@ -66,3 +69,5 @@ ENTRYPOINT ["./docker/prod/entrypoint.sh"]
 
 # Set default command to launch the all-in-one configuration supervised by supervisord
 CMD ["./docker/prod/supervisord"]
+
+

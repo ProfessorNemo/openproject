@@ -33,22 +33,29 @@ See COPYRIGHT and LICENSE files for more details.
   <% breadcrumb_paths(t(:label_table_of_contents)) %>
 <% end %>
 
-<%= toolbar title: t(:label_wiki_toc) do %>
+<%= toolbar title: t(:label_wiki_toc), html: { class: '-with-dropdown' } do %>
   <%= content_tag(:li, watcher_link(@wiki, User.current), class: 'toolbar-item') %>
 <% end %>
 
 <% html_title t(:label_wiki_toc) %>
 
-<div class="wiki-content">
-  <%= render_page_hierarchy(@pages_by_parent_id, nil, timestamp: true) %>
-</div>
+<li class="toolbar-item drop-down">
+  <%= link_to '#', class: 'button',
+              data: {"bs-toggle": 'dropdown'} do %>
+      <span class="button--text"><%= 'Свернуть/развернуть' %></span>
+      <%= op_icon('button--dropdown-indicator') %>
+  <% end %>
+
+    <%= render_page_hierarchy(@pages_by_parent_id, nil, timestamp: true) %>
+</li>
+
 
 <% unless @pages.empty? %>
   <%= other_formats_links do |f| %>
     <%= f.link_to 'Atom', url: {controller: '/activities', action: 'index', show_wiki_edits: 1, key: User.current.rss_key} %>
     <%= f.link_to('HTML', url: {action: 'export'}) if User.current.allowed_to?(:export_wiki_pages, @project) %>
   <% end %>
-<% else %>
+  <% else %>
   <%= no_results_box(action_url:     new_project_wiki_path(@project),
                      display_action: authorize_for('wiki', 'new')) %>
 <% end %>
@@ -56,3 +63,5 @@ See COPYRIGHT and LICENSE files for more details.
 <% content_for :header_tags do %>
   <%= auto_discovery_link_tag(:atom, controller: '/activities', action: 'index', id: @project, show_wiki_edits: 1, format: 'atom', key: User.current.rss_key) %>
 <% end %>
+
+
