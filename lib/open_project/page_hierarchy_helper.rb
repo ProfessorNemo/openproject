@@ -31,9 +31,9 @@ module OpenProject
     def render_page_hierarchy(pages, node = nil, options = {})
       return '' unless pages[node]
 
-      content_tag :ul, class: "pages-hierarchy -with-hierarchy" do
+      content_tag :ul, class: "menu-drop-down-container" do
         chunks = pages[node].map do |page|
-          content_tag :li, class: '-hierarchy-expanded' do
+          content_tag :li, class: 'dropdown-menu' do
             is_parent = pages[page.id]
             concat render_hierarchy_item(page, is_parent, options)
             concat render_page_hierarchy(pages, page.id, options) if is_parent
@@ -51,7 +51,7 @@ module OpenProject
         concat link_to(page.title,
                        url_helpers.project_wiki_path(page.project, page),
                        title: hierarchy_item_title(options, page),
-                       class: 'tree-menu--title ellipsis') do
+                       class: 'dropdown-item') do
         end
       end
     end

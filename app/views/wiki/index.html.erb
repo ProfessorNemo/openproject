@@ -33,22 +33,23 @@ See COPYRIGHT and LICENSE files for more details.
   <% breadcrumb_paths(t(:label_table_of_contents)) %>
 <% end %>
 
-<%= toolbar title: t(:label_wiki_toc), html: { class: '-with-dropdown' } do %>
-  <%= content_tag(:li, watcher_link(@wiki, User.current), class: 'toolbar-item') %>
-<% end %>
-
 <% html_title t(:label_wiki_toc) %>
 
-<li class="toolbar-item drop-down">
-  <%= link_to '#', class: 'button',
-              data: {"bs-toggle": 'dropdown'} do %>
-      <span class="button--text"><%= 'Свернуть/развернуть' %></span>
-      <%= op_icon('button--dropdown-indicator') %>
-  <% end %>
+<div class="container">
 
-    <%= render_page_hierarchy(@pages_by_parent_id, nil, timestamp: true) %>
-</li>
+<%= toolbar title: t(:label_wiki_toc), html: {class: '-with-dropdown'} do %>
+  <%= content_tag(:li, watcher_link(@wiki, User.current), class: 'toolbar-item') %>
 
+  <li class="toolbar-item drop-down">
+    <%= link_to '#', class: 'button',
+                data: {"bs-toggle": 'dropdown'} do %>
+        <span class="button--text"><%= 'Свернуть/развернуть' %></span>
+        <%= op_icon('button--dropdown-indicator') %>
+    <% end %>
+
+      <%= render_page_hierarchy(@pages_by_parent_id, nil, timestamp: true) %>
+  </li>
+<% end %>
 
 <% unless @pages.empty? %>
   <%= other_formats_links do |f| %>
@@ -64,4 +65,4 @@ See COPYRIGHT and LICENSE files for more details.
   <%= auto_discovery_link_tag(:atom, controller: '/activities', action: 'index', id: @project, show_wiki_edits: 1, format: 'atom', key: User.current.rss_key) %>
 <% end %>
 
-
+</div>
